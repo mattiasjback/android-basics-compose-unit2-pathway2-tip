@@ -53,5 +53,10 @@ fun TipApp() {
 @Composable
 fun EditTextField() {
     var amountInput by remember { mutableStateOf("") }
-    TextField(value = amountInput, onValueChange = { amountInput = it })
+    TextField(
+        value = amountInput,
+        onValueChange = { amountInput = it },
+        label = { Text(stringResource(id = R.string.cost_of_service)) },
+        modifier = Modifier.fillMaxWidth()
+    )
 }
