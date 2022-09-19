@@ -39,7 +39,8 @@ class MainActivity : ComponentActivity() {
 fun TipApp() {
     var amountInput by remember { mutableStateOf("") }
     val amount = amountInput.toDoubleOrNull() ?: 0.0
-    val tip = calculateTip(amount, 15.0)
+    var tipInput by remember { mutableStateOf("") }
+    val tip = calculateTip(amount, tipInput.toDoubleOrNull() ?: 0.0)
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -58,6 +59,11 @@ fun TipApp() {
                 value = amountInput,
                 label = R.string.bill_amount,
                 onValueChange = { amountInput = it })
+            EditTextField(
+                value = "",
+                label = R.string.how_was_the_service,
+                onValueChange = { tipInput = it }
+            )
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.tip_amount, tip),
