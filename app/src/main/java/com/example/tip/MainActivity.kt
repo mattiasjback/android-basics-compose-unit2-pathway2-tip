@@ -60,7 +60,7 @@ fun TipApp() {
                 label = R.string.bill_amount,
                 onValueChange = { amountInput = it })
             EditTextField(
-                value = "",
+                value = tipInput,
                 label = R.string.how_was_the_service,
                 onValueChange = { tipInput = it }
             )
