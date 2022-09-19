@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
@@ -53,7 +54,10 @@ fun TipApp() {
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditTextField(amountInput) { amountInput = it }
+            EditTextField(
+                value = amountInput,
+                label = R.string.bill_amount,
+                onValueChange = { amountInput = it })
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.tip_amount, tip),
@@ -66,11 +70,16 @@ fun TipApp() {
 }
 
 @Composable
-fun EditTextField(value: String, onValueChange: (String) -> Unit) {
+fun EditTextField(
+    value: String,
+    @StringRes label: Int,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     TextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(stringResource(id = R.string.cost_of_service)) },
+        label = { Text(stringResource(id = label)) },
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
